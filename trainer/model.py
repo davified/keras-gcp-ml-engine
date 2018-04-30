@@ -1,11 +1,9 @@
 """Implements the Keras Sequential model."""
 
-import keras
 import pandas as pd
-from keras import backend as K
-from keras import layers, models
-from keras.utils import np_utils
-from keras.backend import relu, softmax
+from tensorflow.python.keras import backend as K
+from tensorflow.python.keras import layers, models
+from tensorflow.python.keras.backend import relu, softmax
 
 #Python2/3 compatibility imports
 from six.moves.urllib import parse as urlparse
@@ -61,7 +59,7 @@ def model_fn(input_dim,
 
 def compile_model(model, learning_rate):
   model.compile(loss='categorical_crossentropy',
-                optimizer=keras.optimizers.RMSprop(lr=learning_rate),
+                optimizer=tf.keras.optimizers.RMSprop(lr=learning_rate),
                 metrics=['accuracy'])
   return model
 

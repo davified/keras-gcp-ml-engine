@@ -7,9 +7,8 @@ import os
 import shutil
 
 import trainer.model as model
-
-from keras.callbacks import TensorBoard, Callback, ModelCheckpoint
-from keras.models import load_model
+from tensorflow.python.keras.callbacks import TensorBoard, Callback, ModelCheckpoint
+from tensorflow.python.keras.models import load_model
 from tensorflow.python.lib.io import file_io
 
 INPUT_SIZE = 55
@@ -107,8 +106,7 @@ def dispatch(train_files,
   tblog = TensorBoard(
       log_dir=os.path.join(job_dir, 'logs'),
       histogram_freq=0,
-      write_graph=True,
-      embeddings_freq=0)
+      write_graph=True)
 
   callbacks=[checkpoint, evaluation, tblog]
 
