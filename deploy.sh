@@ -7,7 +7,9 @@ source ./common.sh
 MODEL_BINARIES=$GCLOUD_JOB_DIR/export
 
 # Create a model resource on Cloud ML Engine
-gcloud ml-engine models create ${MODEL_NAME} --regions ${REGION}
+if [[ gcloud ml-engine models list | grep ${MODEL_NAME} == '' ]]; then
+  gcloud ml-engine models create ${MODEL_NAME} --regions ${REGION}
+fi
 
 # Create a version of the model
 gcloud ml-engine versions create ${VERSION_NAME} \

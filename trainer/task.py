@@ -125,7 +125,9 @@ def dispatch(train_files,
     census_model.save(os.path.join(job_dir, CENSUS_MODEL))
 
   # Convert the Keras model to TensorFlow SavedModel
-  # shutil.rmtree(os.path.join(job_dir, 'export')) # TODO: add conditional check to remove dir if dir exists
+  if os.path.exists(os.path.join(job_dir, 'export')):
+    shutil.rmtree(os.path.join(job_dir, 'export'))
+    
   model.to_savedmodel(census_model, os.path.join(job_dir, 'export'))
 
 # h5py workaround: copy local models over to GCS if the job_dir is GCS.

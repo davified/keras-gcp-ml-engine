@@ -16,6 +16,11 @@ if ! gsutil ls | grep -q ${GCLOUD_JOB_DIR}/; then
   gsutil mb -l ${REGION} ${GCLOUD_JOB_DIR}
 fi
 
+# Removing ${GCLOUD_JOB_DIR}/export created from past trainings
+if gsutil ls ${GCLOUD_JOB_DIR} | grep -q export; then
+  gsutil rm -r ${GCLOUD_JOB_DIR}/export
+fi
+
 gcloud ml-engine jobs submit training $JOB_NAME \
                                     --stream-logs \
                                     --runtime-version 1.4 \
